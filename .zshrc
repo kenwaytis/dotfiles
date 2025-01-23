@@ -67,14 +67,29 @@ export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
+
+if [[ $LinuxDistributionId == "arch" ]]; then
+
+    __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/opt/miniconda3/bin:$PATH"
+        if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/opt/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/opt/miniconda3/bin:$PATH"
+        fi
+    fi
+else 
+    __conda_setup="$('/home/paidax/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/home/paidax/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/paidax/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/paidax/miniconda3/bin:$PATH"
+        fi                                                                                                                                                                                        
     fi
 fi
 unset __conda_setup
@@ -82,13 +97,13 @@ unset __conda_setup
 
 alias vi=vim
 
-alias top=btm
 if [[ $LinuxDistributionId == "ubuntu" ]]; then
     # Ubuntu 特定的配置
     alias top=bottom
+else
+    alias top=btn
 fi
 
-alias top=btm #TODO Change between different system
 alias cp=rsync
 alias rsync="rsync --progress"
 alias scrcpy="scrcpy --turn-screen-off --stay-awake"
@@ -107,6 +122,10 @@ alias t='tgpt'
 source /home/paidax/software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # setup zoxide and instread of cd
+if [[ $LinuxDistributionId == "ubuntu" ]]; then
+    # Ubuntu 特定的配置
+    export PATH="$PATH:/home/paidax/.local/bin" 
+fi
 eval "$(zoxide init zsh --cmd cd)"
 
 # you-should-use Show in last line
