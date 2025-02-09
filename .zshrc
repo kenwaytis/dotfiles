@@ -1,9 +1,9 @@
-# Powerlevel10k Config
+# Powerlevel10k Config --------------------------------------------------------------------------------
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# My Variables
+# My Variables --------------------------------------------------------------------------------
 # 检测 Linux 发行版并设置 LinuxDistributionId 变量
 if [[ -f /etc/os-release ]]; then
     source /etc/os-release
@@ -31,7 +31,7 @@ else
     LinuxDistributionId="unknown"
 fi
 
-# Path to your Oh My Zsh installation.
+# Path to your Oh My Zsh installation. --------------------------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -100,12 +100,16 @@ alias vi=vim
 if [[ $LinuxDistributionId == "ubuntu" ]]; then
     # Ubuntu 特定的配置
     alias top=bottom
+    alias cat="batcat --paging=never"
 else
     alias top=btn
+    alias cat="bat --paging=never"
 fi
 
+
+
 alias cp=rsync
-alias rsync="rsync --progress"
+alias rsync="rsync --progress -a"
 alias scrcpy="scrcpy --turn-screen-off --stay-awake"
 
 alias ls="eza --icons"
