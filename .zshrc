@@ -102,7 +102,7 @@ if [[ $LinuxDistributionId == "ubuntu" ]]; then
     alias top=bottom
     alias cat="batcat --paging=never"
 else
-    alias top=btn
+    alias top=btm
     alias cat="bat --paging=never"
 fi
 
@@ -118,7 +118,7 @@ alias tree="eza --tree --icons"
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 alias t='tgpt'
-
+alias sound='pavucontrol'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
